@@ -5,28 +5,16 @@
 * [Introduction](#Introduction)
 * [Formatting](formatting.md)
 * [Naming](naming.md)
+* [Comments](comments.md)
 * [Modules and crates](modules.md)
-* [Implementing traits]()
-  - iterators
-  - derive
-  - operator overloading
-* [Error handling]()
-* [Data structures]()
-* [Functions and traits]()
-  - generics vs impl Foo; how many generic arguments, default generics, assoc types
-* [Expression-level code]()
-  - taking closures
-  - panicking dtors
-  - logging/printfs
-  - imperative vs combinator style
-  - variable shadowing
-  - `match` best practice
-  - unwrap/expect/etc.
-  - panicking (implicit, panic handling, documentation, assert, debug_assert)
-* [Macros]()
-* [Unsafe code]()
-* [Performance]()
-* [Comments]()
+* [Implementing traits](traits.md)
+* [Data structures](data.md)
+* [Functions, methods, and traits](functions.md)
+* [Macros](macros.md)
+* [Expressions and statements](exprs.md)
+* [Error handling](errors.md)
+* [Unsafe code](unsafe.md)
+* [Performance](performance.md)
 
 
 ## Introduction
