@@ -51,7 +51,7 @@ For other unwrapping methods, follow the naming conventions used by `Box`, `Opti
 
 The default method for iterating over the contents of a type should be called `iter`.
 
-Prefer not to use getter and setter methods, but if you do they should be called `foo` and `set_foo` (where `foo` is the name of the field), not `get_foo`.
+Prefer not to use getter and setter methods, but if you do they should be called `foo` and `set_foo` (where `foo` is the name of the field), not `get_foo`. Method for checking the presence of a field should have an `is_` or `has_` prefix and return a `bool`.
 
 When naming traits: "Prefer (transitive) verbs, nouns, and then adjectives; avoid grammatical suffixes (like -able)".
 E.g., `Copy`, `Send`, `Encode`.
