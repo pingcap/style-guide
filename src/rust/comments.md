@@ -19,6 +19,7 @@
 * Existing guidelines:
   - [TiKV guidelines](https://github.com/tikv/tikv/blob/master/CODE_COMMENT_STYLE.md)
   - The Rust book: [Making Useful Documentation Comments](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#making-useful-documentation-comments)
+  - [RFC 1574](https://github.com/rust-lang/rfcs/blob/master/text/1574-more-api-documentation-conventions.md)
 
 
 ## Where/When to comment?

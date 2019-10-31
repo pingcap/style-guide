@@ -10,6 +10,7 @@ TODO
 
 * Prefer implementing a trait to adding an inherent method where a trait already exists (e.g., prefer to implement `Default` rather than have a `new` function with no arguments).
 
+TODO ordering of impls
 
 * Follow the rules of traits
   - hash and eq
