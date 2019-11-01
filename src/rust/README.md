@@ -19,10 +19,22 @@
 
 ## Introduction
 
-Prefer to use 2018 edition idioms to 2015 idioms.
+* Prefer to use 2018 edition idioms to 2015 idioms.
+* Use Rustmt.
+* Use Clippy.
+  - TODO which lints should be used/not used, note disabled lints in `make clippy`, could we turn on some pedantic lints?
 
 TODO
 
 ### Further reading
 
 TODO
+
+### Open questions
+
+* error handling
+* callbacks
+    - could be futures?
+    - performance if we need conversion layer (widely used)
+* metrics?
+    - global vs local (better perf) vs thread local metrics (maybe the best, but not widely used)

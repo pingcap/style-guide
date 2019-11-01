@@ -38,6 +38,10 @@ Example:
 TODO
 ```
 
+TODO
+    can we use rustfmt args to automatically format
+
+
 ### Rationale
 
 * Ecosystem conventions.

@@ -3,7 +3,7 @@
 ## Contents
 
 * [Introduction](intro.md)
-* [Genernal advice](general.md)
+* [General advice](general.md)
 * [Rust](rust/README.md)
 * [Go](go/README.md)
 

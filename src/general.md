@@ -13,4 +13,4 @@
 * don't commit commented out code
 * TODOs/FIXMEs
 * compiler warnings, linting
-
+* PRs and commits

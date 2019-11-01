@@ -1,20 +1,32 @@
 # Modules and crates
 
+TODO
+
+where to put test-only code?
+    cfg mod vs item
+
+impl in different module
+
+
 ## Module structure
 
 * Modules should be small, but usually larger than a single item.
   - A module should have a single concept, usually a single data type, its `impl`s, and its supporting types and functions.
-  Alternatively, a module might be a small collection of functions with a single, coherent theme.
+    Alternatively, a module might be a small collection of functions with a single, coherent theme.
+* `util` modules are often a code smell and can be split up and given better names.
 * Most modules should be declared in their own file.
   Modules consisting of only tests (`mod test { ... }`) and small modules used primarily as unsafe boundaries, may be declared inline.
 * Modules should always have module-level documentation.
 * Nested modules must be intuitively part of their enclosing module.
 * Put attributes (e.g., `#[cfg(...)]`) on the module declaration (`mod foo;` or `mod foo { ... }`); do not use inner attributes (e.g., `#![cfg(...)]`).
 
+TODO what should be in a prelude?
+
 ### Rationale
 
-* Community convention.
+* Community conventions.
 * Module-level docs proved very useful in rustc.
+
 
 ## Privacy and visibility
 

@@ -5,6 +5,8 @@
 * Prefer short functions and methods.
 * Don't use `#[inline]` (or `never` or `always`) unless benchmarking shows an improvement.
 
+TODO ctors vs builders
+
 ## Methods
 
 * Where there is a clear receiver (`self`), prefer a method to a function.
@@ -27,10 +29,20 @@
 
 TODO how many generic arguments
 
+params
+    AsRef vs &
+    Into
+    `Cow<'static, _>`for setters etc.
+    impl Tr vs dyn Tr
+
 
 ## Traits and impls
 
 * Use traits for most aspects of a type's behaviour; reserve inherent methods for actions on the concrete data.
+
+TODO
+
+Trait bounds in struct vs impl
 
 ## Associated types
 
