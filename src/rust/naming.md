@@ -1,9 +1,12 @@
 # Naming
 
+Prefer meaningful names to short names.
+
 ## Casing
 
 * Types and traits: `UpperCamelCase`,
 * Enum variants: `UpperCamelCase`,
+  - Do not prefix with the enum name, e.g., `Some` not `OptionSome`,
 * Struct fields: `snake_case`,
 * Function and method names: `snake_case`,
 * Local variables: `snake_case`,

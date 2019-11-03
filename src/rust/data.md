@@ -1,1 +1,68 @@
 # Data structures
+
+For generic data types, prefer to use the most flexible bounds. That usually means putting strict bounds only on `impl`s, not on the concrete datatype, and may mean splitting `impl`s into smaller blocks.
+The generic parameters on the concrete type should only have bounds if they are intrinsic to the datatype itself (which includes lifetime bounds, `?Sized`, where the bound is required to name an associated type, or the bound is required by a `Drop` `impl`).
+Generic parameters in concrete datatypes should never have derivable bounds.
+
+Rationale: makes datatypes most flexible, reduces code duplication, and makes types more backwards compatible.
+See [this section](https://github.com/rust-lang/api-guidelines/blob/master/src/future-proofing.md#data-structures-do-not-duplicate-derived-trait-bounds-c-struct-bounds) of the API guide for more details.
+
+Use types to enforce invariants.
+Take advantage of structs, tuples, and enums to define the valid states of an object.
+Where possible, make invalid objects impossible.
+
+## Structs
+
+* Prefer small structs.
+  Build several small structs into one larger one.
+  - Rationale: more borrow checker-friendly.
+* Consider carefully whether fields should be public:
+  - public fields are part of a struct's API,
+  - prefer to use public fields to getter and setter methods,
+  - if there are object invariants that include multiple fields, then all those fields must be private,
+  - changing a public field in any way is a breaking change,
+  - if all fields in a struct are public, then *adding* a field is a [breaking change](https://github.com/rust-unofficial/patterns/blob/master/idioms/priv-extend.md).
+* Empty structs should usually be defined as `struct Foo;`, not `struct Foo {}` or `struct Foo();`.
+* If a struct is `repr(C)` then the order of the fields is significant.
+  Usually, the most efficient representation is to list the fields in descending order of size.
+  If a different ordering is required or more performant, document it.
+* Restrict use of tuple structs to cases where there is only one field and it is obvious what that field is (usually because the struct is just a wrapper).
+* Use the [newtype pattern](https://github.com/rust-unofficial/patterns/blob/master/patterns/newtype.md) where structs have the same data but different behaviour.
+* Most newtypes and similar wrappers should be `repr(transparent)`.
+* It is usually enough to document the struct, rather than individual fields
+  
+
+## Enums
+
+* Enums with many variants are fine.
+* Be aware that the size of an enum is the size of it's largest variant.
+  Enums with very different sized variants are likely to be inefficient.
+* Variants should not have more than about three fields.
+* For more complex variants, the variant should have a single struct field with the complex fields moved to the struct.
+  In this idiom, the struct should have the same name as the variant.
+* Avoid named fields in variants.
+  - Rationale: in most cases where a struct variant is better than a tuple variant, using a named struct is even better.
+* Avoid empty variants, i.e., prefer `Foo` to `Foo()` or `Foo {}`.
+
+
+## Tuples
+
+* Prefer using structs to tuples in types (e.g., of fields, return types, etc.).
+  I.e., most cases where tuples are good to use are where the type is anonymous (e.g., in closures).
+* Only use tuples where the meaning is clearly multiple types, not as a convenience where a named type could be used.
+  E.g., Use `Point { x: i32, y: i32 }` rather than `(i32, i32)`.
+* A tuple with multiple elements of the same type is very rarely a good idea.
+
+Rationale: named types and fields nearly always improve the readability of code.
+
+
+## Unions
+
+Only use unions for FFI to mirror a C enum. In Rust code prefer an enum.
+
+
+## Builder pattern
+
+A common way to construct concrete data with complex internals is the [builder pattern](https://doc.rust-lang.org/1.0.0/style/ownership/builders.html).
+It is recommended to use the builder pattern in preference to multiple constructor functions.
+Prefer non-consuming builders (i.e., builder functions should take and return `&mut self`, not `self`).
