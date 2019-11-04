@@ -7,7 +7,7 @@
   - Almost any use of uninitialized memory will lead to UB.
 * Where possible encapsulate `unsafe` code inside a safe function which re-establishes invariants before returning.
 
-See also the [nomicon](TODO).
+See also the [nomicon](https://doc.rust-lang.org/nomicon/).
 
 ## Documentation
 
