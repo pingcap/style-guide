@@ -17,6 +17,8 @@ Prefer implementing a trait to adding an inherent method where a trait already e
 
 Unsafe impls can introduce global unsafety, be very careful!
 
+TODO Types eagerly implement common traits, Types are Send and Sync where possible
+
 ### Rationale
 
 * Put code close to data.
@@ -56,6 +58,7 @@ Marker traits such as `Sync` and `Unpin` usually have strong semantics that must
 ## Some common traits
 
 Implement `Debug` wherever possible.
+The output of `Debug` should be meaningful and useful, but should not be too long (since that can overwhelm logs).
 
 Most collections should have an iterator which implements `Iterator` and implement `IntoIterator` themselves.
 They may also provide an inherent `iter` method for return a borrowed iterator, see [`slice::iter`](https://doc.rust-lang.org/std/primitive.slice.html#method.iter) for an example.
@@ -66,12 +69,16 @@ If in doubt, only use implement operator types for numeric or logical types.
 
 Only implement `Index` for collection types.
 Most collections should implement `Index` and `Iterator`.
+TODO extend
 
 Only implement `Deref` for smart pointer types; never for general coercion.
 Most smart pointers should implement `Deref` and `Borrow`.
 
 `Drop` should be implemented for any types which need to tidy-up, manual destructors should never be used.
 `Drop` implementations must *never* panic, be aware of implicit panics, for example due to bounds checking in indexing.
+
+TODO Destructors that may block have alternatives
+Dtors should never fail
 
 `Fn`, `FnMut`, and `FnOnce` should be implemented by function-like objects which can be called (e.g., callbacks).
 Uses of these traits should be rare, usually closures or futures are a better choice than a custom callback.

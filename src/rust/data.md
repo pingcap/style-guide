@@ -9,13 +9,21 @@ See [this section](https://github.com/rust-lang/api-guidelines/blob/master/src/f
 
 Use types to enforce invariants.
 Take advantage of structs, tuples, and enums to define the valid states of an object.
+Use associated types to enforce relationships between types.
 Where possible, make invalid objects impossible.
+
+
+TODO
+* Avoid default generics, unless the default is used in the vast majority of situations (e.g., the default is only overridden for testing, or in very exceptional cases, such as supplying a hasher to a hashtable).
+  - Rationale: having an explicit type often improves comprehensability of code and outweighs the convenience of skipping a generic parameter).
+* Use type aliases (`type`) to provide convenience versions of common generic types (e.g., `type Result<T> = Result<T, MyErr>;`).
+
 
 ## Structs
 
 * Prefer small structs.
   Build several small structs into one larger one.
-  - Rationale: more borrow checker-friendly.
+  - Rationale: more borrow checker-friendly, see also [this design pattern](https://github.com/rust-unofficial/patterns/blob/master/patterns/compose-structs.md).
 * Consider carefully whether fields should be public:
   - public fields are part of a struct's API,
   - prefer to use public fields to getter and setter methods,
