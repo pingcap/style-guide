@@ -9,7 +9,7 @@
 
 ## Resources
 
-* [Formatting guide](https://docs.google.com/presentation/d/1RLNyr3riO2LyqQsMAOvMMyGTllhx1wPmfkXXcbtOB00/edit#slide=id.p)
+* [Formatting guide](https://github.com/rust-lang/rfcs/tree/master/style-guide)
 * [API design guidelines](https://github.com/rust-lang-nursery/api-guidelines)
 * [Killercup's style guide](https://deterministic.space/elegant-apis-in-rust.html)
 * [Rust design patterns](https://github.com/rust-unofficial/patterns)

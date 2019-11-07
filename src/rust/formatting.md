@@ -20,6 +20,9 @@ If the content is tabular, arrange the data in columns using spaces, not tabs, o
 
 Rustfmt will format imports but permits several different styles.
 
+TODO use `self::` rather than `crate::foo::` or using a local name
+TODO if two or fewer imports in each category, no newlines
+
 * Avoid `extern crate`, except for macros which are used in many files (e.g., logging macros).
   Group `extern crate`s together.
 * Group imports from the same logical project together (i.e., imports from different crates in the same project).
