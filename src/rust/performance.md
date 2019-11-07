@@ -8,11 +8,14 @@
   - Use iterators.
   - Don't use `Arc` where `Rc` would work; don't use a `Mutex` where a `RefCell` would work.
   - Avoid global, mutable state.
+  - Prefer to use `push` and `push_str` to build strings rather than the `format` macro.
+  - Don't worry about empty Vecs/Strings - they don't allocate and are very cheap.
 * Don't hide potentially expensive code
   - code that may do IO, block, or sleep should be clearly named and documented.
   - allocation should be either expected from the purpose of a function or be documented (e.g., conversion functions should not allocate).
 * Consider the computational complexity of algorithms, but bear in mind the expected size of input.
 * Consider the concurrency of code.
+
 
 ## Rationale
 

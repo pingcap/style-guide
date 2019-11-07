@@ -10,6 +10,8 @@
 * Wrap long lines of comments at 80 or 100 characters.
 * Document why a function might panic.
 * Document any unsafe code.
+* Do not commit commented out code.
+
 
 ### Rationale
 

@@ -6,6 +6,7 @@
 * Prefer `MaybeInit` to any use of uninitialized memory.
   - Almost any use of uninitialized memory will lead to UB.
 * Where possible encapsulate `unsafe` code inside a safe function which re-establishes invariants before returning.
+* mem and ptr functions
 
 See also the [nomicon](https://doc.rust-lang.org/nomicon/).
 
