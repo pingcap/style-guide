@@ -7,6 +7,8 @@ where to put test-only code?
 
 impl in different module
 
+multiple impls with docs
+
 
 ## Module structure
 
