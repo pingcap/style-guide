@@ -1,5 +1,7 @@
 # General advice
 
+TODO
+
 * (premature) optimisation
 * don't be clever
 * short functions
@@ -13,4 +15,3 @@
 * don't commit commented out code
 * TODOs/FIXMEs
 * compiler warnings, linting
-* PRs and commits
