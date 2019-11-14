@@ -64,14 +64,10 @@ Use `for_each` or an imperative loop instead.
 Rationale: clearer intention and does not require allocation.
 
 
-## `match`
+## `match` and `if`
 
 Avoid using `match` where possible by using method calls.
 This is especially true for `Option` and `Result` which have a rich set of combinator methods.
-
-Prefer to use `if let` rather than `match` with a single arm.
-Prefer to use `match` rather than `if let ... else`.
-Rationale: use the clearest, most concise code possible.
 
 Avoid pattern-matching on all fields in a struct - this is a backwards compatibility hazard.
 
@@ -83,6 +79,38 @@ See the [match ergonomics RFC](https://github.com/rust-lang/rfcs/blob/master/tex
 
 If you have multiple wildcards (`_`) in a pattern, condense them into a single `..`.
 
+Prefer to use `if let` rather than `match` with a single arm.
+Prefer to use `match` rather than `if let ... else`.
+Rationale: use the clearest, most concise code possible.
+
+In an `if ... else` expression, but the positive condition first, e.g., `if foo { a() } else { b() }` rather than `if !foo { b() } else { a() }`.
+
+Prefer a guarded early return to an `if ... else` expression where one block is large and one block is small.
+E.g., prefer
+
+```rust
+fn foo(x: i32) -> u8 {
+    if x != 0 {
+        return 42;    
+    }
+
+    // ...
+    0
+}
+```
+
+to
+
+```rust
+fn foo(x: i32) -> u8 {
+    if x == 0 {
+        // ...
+        0
+    } else {
+        42
+    }
+}
+```
 
 ## Panicking
 
