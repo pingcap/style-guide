@@ -1,6 +1,6 @@
 # PingCAP coding style guide
 
-Read the [style guide](TODO).
+Read the [style guide](https://pingcap.github.io/style-guide/).
 
 This style guide contains the recommended way to write Rust code at PingCAP and in the TiKV project.
 In the future it will contain guidelines for writing code in other languages.
