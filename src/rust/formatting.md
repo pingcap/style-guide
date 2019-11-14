@@ -11,6 +11,8 @@ In these cases, follow the Rust formatting [style guide](https://github.com/rust
 When writing macro uses which Rustfmt does not format, if the content is code-like, try to follow the formatting style guide.
 If the content is tabular, arrange the data in columns using spaces, not tabs, on multiple-of-four column positions.
 
+Always use Unix line endings (`\n`).
+
 ### Rationale
 
 * Make code consistent with the Rust ecosystem to lower barriers to entry.
@@ -20,29 +22,51 @@ If the content is tabular, arrange the data in columns using spaces, not tabs, o
 
 Rustfmt will format imports but permits several different styles.
 
-TODO use `self::` rather than `crate::foo::` or using a local name
-TODO if two or fewer imports in each category, no newlines
-
 * Avoid `extern crate`, except for macros which are used in many files (e.g., logging macros).
   Group `extern crate`s together.
-* Group imports from the same logical project together (i.e., imports from different crates in the same project).
-* Group imports from external crates together; do not separate `std` imports from other crates.
+* Group all imports together.
 * Group re-exports together (`pub use ...;`).
+* Use a single nested import, rather than multiple imports, for each crate.
+  - This can be achieved mechanically by using the `merge_imports` option with Rustfmt.
 * Prefer to use absolute paths to relative paths (i.e., `crate::..` rather than `super::...` or `self::...`).
   Exception: when re-exporting from sub-modules, use relative paths (e.g., `pub use self::foo::bar;`).
 * Avoid glob imports.
   Only use a glob import when you mean "import lots of items from some module", not when you mean "I want lots of items from this module, but I don't want to write them out".
-  Exception, if a crate provides a prelude module, import it using a glob import (e.g., `use futures::prelude::*'`).
-* Use a single nested import, rather than multiple imports, for each crate.
+  - Exception, if a crate provides a prelude module, import it using a glob import (e.g., `use futures::prelude::*'`).
+  - Exception, every `test` module should have a `use super::*;` import.
 
 Example:
 
 ```rust
-TODO
-```
+use crate::{
+    pd::client::{Cluster, RetryClient},
+    util::GLOBAL_TIMER_HANDLE,
+    Result,
+};
+use futures::{
+    compat::Compat01As03,
+    prelude::*,
+    ready,
+    task::{Context, Poll},
+};
+use std::{
+    pin::Pin,
+    sync::Arc,
+    time::{Duration, Instant},
+};
 
-TODO
-    can we use rustfmt args to automatically format
+pub use self::Request;
+
+// ...
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    use tokio_timer::timer::Handle;
+
+    // ...
+}
+```
 
 
 ### Rationale
@@ -52,6 +76,3 @@ TODO
 * Self-consistency.
 * Make it easier to figure out where names come from without IDE support
 * Make it easier to see which crates and modules a module depends on.
-
-
-

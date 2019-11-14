@@ -46,7 +46,7 @@ The following resources were useful in making this guide, there is often more de
 
 ### Open questions
 
-TODO
+FIXME: address these
 
 * error handling
 * callbacks
@@ -55,3 +55,16 @@ TODO
 * metrics?
     - global vs local (better perf) vs thread local metrics (maybe the best, but not widely used)
 * could we turn on some pedantic lints or use some rustfmt options?
+  - [Rustfmt](https://github.com/rust-lang/rustfmt/blob/master/Configurations.md)
+    * merge_imports
+    * merge_derives
+    * condense_wildcard_suffixes
+    * newline_style = "Unix"
+    * normalize_comments
+    * normalize_doc_attributes
+    * reorder_impl_items
+    * report_todo
+    * unstable_features
+    * use_field_init_shorthand
+    * use_try_shorthand
+  - [Clippy](https://rust-lang.github.io/rust-clippy/master/index.html)

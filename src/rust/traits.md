@@ -11,13 +11,21 @@ Group `impl`s for the same traits together.
 Write `impl`s directly after their concrete types.
 Write blanket `impl`s directly after their traits.
 
+Prefer to write all `impl`s in a single module.
+However, very large `impl`s may be split across modules if this improves readability.
+
+There can be multiple `impl`s with the same signature in one module, if grouping methods in this way improves readability.
+Doing this is useful because the grouping will be preserved by Rustdoc and any documentation on an `impl` is used as an 'introduction' to a group of methods.
+
+In crates which are useful to others and published, types should implement as many of the common traits from std as possible (for maximum flexibility and interoperability).
+In crates which are not published, implement traits as needed (YAGNI).
+
 Prefer to use `derive` rather than a manual `impl` where possible.
 
 Prefer implementing a trait to adding an inherent method where a trait already exists (e.g., prefer to implement `Default` rather than have a `new` function with no arguments).
 
 Unsafe impls can introduce global unsafety, be very careful!
 
-TODO Types eagerly implement common traits, Types are Send and Sync where possible
 
 ### Rationale
 
@@ -68,17 +76,22 @@ For example, a vector type should not implement `Mul` because both the cross pro
 If in doubt, only use implement operator types for numeric or logical types.
 
 Only implement `Index` for collection types.
-Most collections should implement `Index` and `Iterator`.
-TODO extend
+Most collections should implement `Index`, `IntoIterator`, and `FromIterator`.
+Most mutable collections should implement `Extend`.
 
 Only implement `Deref` for smart pointer types; never for general coercion.
 Most smart pointers should implement `Deref` and `Borrow`.
 
 `Drop` should be implemented for any types which need to tidy-up, manual destructors should never be used.
-`Drop` implementations must *never* panic, be aware of implicit panics, for example due to bounds checking in indexing.
+`Drop` implementations must *never* panic.
+Be aware of implicit panics, for example due to bounds checking in indexing.
+`Drop` implementations should not fail in other way.
+`Drop` implementations should not block.
 
-TODO Destructors that may block have alternatives
-Dtors should never fail
+If a destructor might panic, fail, or block, provide a method which performs the shutdown behaviour and which returns a result (or, if necessary, panic).
+E.g., `close`.
+The use may then call that method and if it succeeds be guaranteed that the destructor will be well-behaved.
+This should be well-documented.
 
 `Fn`, `FnMut`, and `FnOnce` should be implemented by function-like objects which can be called (e.g., callbacks).
 Uses of these traits should be rare, usually closures or futures are a better choice than a custom callback.

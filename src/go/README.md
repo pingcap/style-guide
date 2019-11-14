@@ -1,6 +1,6 @@
 # Go
 
-TODO
+FIXME: write this section
 
 ## Resources
 

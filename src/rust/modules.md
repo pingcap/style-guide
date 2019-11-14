@@ -1,15 +1,5 @@
 # Modules and crates
 
-TODO
-
-where to put test-only code?
-    cfg mod vs item
-
-impl in different module
-
-multiple impls with docs
-
-
 ## Module structure
 
 * Modules should be small, but usually larger than a single item.
@@ -18,11 +8,19 @@ multiple impls with docs
 * `util` modules are often a code smell and can be split up and given better names.
 * Most modules should be declared in their own file.
   Modules consisting of only tests (`mod test { ... }`) and small modules used primarily as unsafe boundaries, may be declared inline.
+* Prefer to put all code used only for testing in a single `test` submodule with `#[cfg(test)]`, rather than putting the `cfg` on mnay items.
 * Modules should always have module-level documentation.
 * Nested modules must be intuitively part of their enclosing module.
 * Put attributes (e.g., `#[cfg(...)]`) on the module declaration (`mod foo;` or `mod foo { ... }`); do not use inner attributes (e.g., `#![cfg(...)]`).
+* If crate (or less commonly, a module) has a large API, but has a relatively small subset which is commonly used, then consider adding a prelude module.
+  - A prelude module should be called `prelude` should be public and at the top-level of a crate.
+  - It should contain only re-exports.
+  - A good prelude contains enough to do a library's common tasks in the common way.
+  - It should not include API for customising a library for special cases.
+  - It is often useful to include modules in the prelude, as well as functions and types.
+  - It should not include items with common names (to avoid name clashes with other modules).
+  - All items should have names which are useful without being prefixed by a crate or module name.
 
-TODO what should be in a prelude?
 
 ### Rationale
 

@@ -30,7 +30,6 @@ Prefer to use `?` or `unwrap`.
 
 Be aware that `let _foo =` and `let _ =` have different semantics; the latter does not create a scoped variable.
 This means that if the value has a destructor, it will be called immediately for the second form and at the end of the scope in the first form.
-TODO - is this still true with NLL?
 
 Use the [`Entry` APIs](https://doc.rust-lang.org/nightly/std/collections/hash_map/enum.Entry.html).
 
@@ -40,6 +39,8 @@ E.g., prefer `let x: Vec<_> = iter.collect();` over `let x = iter.collect::<Vec<
 
 Use parentheses rather than relying on operator precedence.
 Rationale: easier to read and when used regularly, avoids some hard to spot bugs.
+
+Use field initializer shorthand where possible, e.g., prefer `Foo { x, y }` to `Foo { x: x, y: y }`.
 
 ## Mutability
 
@@ -79,6 +80,8 @@ Rationale: fail fast if an `enum` changes.
 
 Prefer to let the compiler handle borrowing, rather than explicitly using `ref` patterns.
 See the [match ergonomics RFC](https://github.com/rust-lang/rfcs/blob/master/text/2005-match-ergonomics.md) for details.
+
+If you have multiple wildcards (`_`) in a pattern, condense them into a single `..`.
 
 
 ## Panicking

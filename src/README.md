@@ -6,7 +6,7 @@
 * [General advice](general.md)
 * [Rust](rust/README.md)
 * [Go](go/README.md)
-* TODO Git, GitHub, commits, and pull requests.
+* FIXME add guidelines for using Git, GitHub, commits, and pull requests.
 
 ## Resources
 
