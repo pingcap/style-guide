@@ -6,7 +6,7 @@
 * The first line of a doc comment should be a short and useful summary.
 * Do not write comments which do not add information, e.g., `Gets a Foo from self` on `get_foo`. Not everything needs a comment.
 * It can be very useful to add long comments to a module, rather than lots of short comments to each function, to give an idea of the core concepts for a module.
-* Place the single-line and block comment above the code it’s annotating.
+* Place single-line and block comments above the code it’s annotating.
 * Wrap long lines of comments at 80 or 100 characters.
 * Document why a function might panic.
 * Document any unsafe code.
@@ -98,6 +98,8 @@ Prefer to write about *why* something is done, rather than *what* and *how* (whi
 - Make sure the comment is up-to-date.
 - Make sure you keep comments up to date when you edit code.
 - Let the code speak for itself.
+- Examples are very useful, include lots of them.
+- Prefer that examples are tested as doc tests.
 
 
 ## Why does a good comment matter?

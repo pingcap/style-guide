@@ -8,7 +8,7 @@
 * Prefer to use `?` or `Result` methods rather than `match` (rationale: more concise and readable code).
 * Error types should compose: it should be possible to nest and abstract error types.
 * Error types should implement `Debug` and `Display` (rationale: makes debugging easier).
-* Error types should implement ` std::error::Error` (rationale: interoperability).
+* Error types should implement `std::error::Error` (rationale: interoperability).
 * Error types should implement `Sync` and `Send` (rationale: it is common to pass errors across threads).
   - if you use a trait object, use the bounds `Error + Send + Sync + 'static`.
 * Prefer to keep context in an error (e.g., by chaining error causes).

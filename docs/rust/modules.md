@@ -18,6 +18,8 @@
   - A good prelude contains enough to do a library's common tasks in the common way.
   - It should not include API for customising a library for special cases.
   - It is often useful to include modules in the prelude, as well as functions and types.
+  - It is often useful to include common traits which are used primarily for their functionality, rather than as explicit bounds.
+    A common example is the `Ext` traits in the `Foo`/`FooExt` extension trait pattern.
   - It should not include items with common names (to avoid name clashes with other modules).
   - All items should have names which are useful without being prefixed by a crate or module name.
 
@@ -193,6 +195,7 @@ Some other considerations for dependencies:
   - `readme`.
 * Crates which are not published on crates.io must also have:
   - `publish = false`.
+* Prefer to use `patch` rather than `replace`.
 * Features should never be negative (e.g., `foo` is good, `no-foo` is bad).
   - Rationale: features are combined across the dependency graph by Cargo.
 * Features should be named using kebab-case.

@@ -1,7 +1,7 @@
 # Functions, methods, and traits
 
 * Conversions should use conversion traits where possible, rather than ad hoc methods.
-  E.g., implement `From<T>` rather than have an inherent `from_T` method.
+  E.g., implement `From<T>` or `TryFrom<T>`, rather than have an inherent `from_T` or `into_T` method.
   - See also [the API guidelines](https://github.com/rust-lang/api-guidelines/blob/master/src/interoperability.md#conversions-use-the-standard-traits-from-asref-asmut-c-conv-traits).
 * Where there is a conversion from `T` to `U` and where `T` has more information than `U`, put conversion methods on `T` and not `U`.
   Where there is a (lossy) conversion from `U` to `T`, put that on `T` too (presumably such a conversion might fail, or will need extra information, so you might not be able to use a standard trait).

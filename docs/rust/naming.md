@@ -53,6 +53,7 @@ Where the wrapper is not consumed and a reference is returned, use `get`.
 For other unwrapping methods, follow the naming conventions used by `Box`, `Option`, and `Result`.
 
 The default method for iterating over the contents of a type should be called `iter`.
+A method for iteration which consumes the collection should be called `into_iter`, however, such a method should usually be in an implementation of `IntoIterator`.
 
 Prefer not to use getter and setter methods, but if you do they should be called `foo` and `set_foo` (where `foo` is the name of the field), not `get_foo`. Method for checking the presence of a field should have an `is_` or `has_` prefix and return a `bool`.
 

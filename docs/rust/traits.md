@@ -88,10 +88,10 @@ Be aware of implicit panics, for example due to bounds checking in indexing.
 `Drop` implementations should not fail in other way.
 `Drop` implementations should not block.
 
-If a destructor might panic, fail, or block, provide a method which performs the shutdown behaviour and which returns a result (or, if necessary, panic).
-E.g., `close`.
-The use may then call that method and if it succeeds be guaranteed that the destructor will be well-behaved.
-This should be well-documented.
+If a destructor might panic, fail, or block, provide a method which performs the shutdown behaviour and which returns a result (or, if necessary, panic), e.g., a `close` method.
+The user may then call the 'shutdown' method and check for errors.
+Then the destructor is guaranteed to be well-behaved.
+This should be documented.
 
 `Fn`, `FnMut`, and `FnOnce` should be implemented by function-like objects which can be called (e.g., callbacks).
 Uses of these traits should be rare, usually closures or futures are a better choice than a custom callback.
