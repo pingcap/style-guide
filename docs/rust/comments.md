@@ -108,3 +108,7 @@ Prefer to write about *why* something is done, rather than *what* and *how* (whi
 - To help maintain the code
 - To improve the API document readability
 - To improve the development efficiency of the whole team
+
+<p align="center">
+<a href="naming.md">&lt;&lt; Naming</a> | <a href="modules.md">Modules and crates &gt;&gt;</a>
+</p>

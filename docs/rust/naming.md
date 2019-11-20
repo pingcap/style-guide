@@ -73,3 +73,7 @@ Existing guidance:
 * [RFC 199](https://github.com/rust-lang/rfcs/blob/master/text/0199-ownership-variants.md)
 * [RFC 344](https://github.com/rust-lang/rfcs/blob/master/text/0344-conventions-galore.md)
 * [RFC 430](https://github.com/rust-lang/rfcs/blob/master/text/0430-finalizing-naming-conventions.md)
+
+<p align="center">
+<a href="formatting.md">&lt;&lt; Formatting</a> | <a href="comments.md">Comments &gt;&gt;</a>
+</p>

@@ -204,3 +204,6 @@ Some other considerations for dependencies:
   - Only crates which have binaries or are otherwise user-facing (i.e., not workspace crates intended to be private dependencies) should have default features.
   - Rationale: they can cause complications with complex dependency graphs, and Cargo has some bugs with default features.
 
+<p align="center">
+<a href="comments.md">&lt;&lt; Comments</a> | <a href="data.md">Data structures &gt;&gt;</a>
+</p>

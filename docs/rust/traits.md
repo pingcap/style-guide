@@ -103,3 +103,7 @@ Don't abuse these traits for custom call-like behaviour.
 * Keep code easy to read by avoiding overuse of operator overriding and special-purpose syntax.
 * Avoid unexpected behaviour.
 * Rust prefers to avoid implicit coercion.
+
+<p align="center">
+<a href="data.md">&lt;&lt; Data types</a> | <a href="functions.md">Functions, methods, and traits &gt;&gt;</a>
+</p>

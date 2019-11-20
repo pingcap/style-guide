@@ -73,3 +73,7 @@ Only use unions for FFI to mirror a C enum. In Rust code prefer an enum.
 A common way to construct concrete data with complex internals is the [builder pattern](https://doc.rust-lang.org/1.0.0/style/ownership/builders.html).
 It is recommended to use the builder pattern in preference to multiple constructor functions.
 Prefer non-consuming builders (i.e., builder functions should take and return `&mut self`, not `self`).
+
+<p align="center">
+<a href="modules.md">&lt;&lt; Modules and crates</a> | <a href="traits.md">Implementing traits &gt;&gt;</a>
+</p>

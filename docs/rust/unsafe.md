@@ -90,3 +90,7 @@ The standard library's `Vec` is an implementation of this done well.
 The [`vec`](https://github.com/rust-lang/rust/blob/master/src/liballoc/vec.rs) module contains very little unsafe code, and that unsafe code depends on fairly simple validity invariants which are easy to maintain for callers of the few unsafe functions.
 Underneath `vec` is the [`raw_vec`](https://github.com/rust-lang/rust/blob/master/src/liballoc/raw_vec.rs) which has much more complex invariants and more unsafe code, but again this is well-encapsulated.
 Note that the style of documentation is not quite what we use in TiKV - prefer to document invariants the module level, as well as on unsafe functions, and to document the safety invariants of every unsafe block.
+
+<p align="center">
+<a href="errors.md">&lt;&lt; Error handling</a> | <a href="performance.md">Performance &gt;&gt;</a>
+</p>

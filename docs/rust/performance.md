@@ -24,3 +24,7 @@
 * Use iterators to avoid slow bounds checks.
 * Don't surprise clients of your code.
 * Performant code requires scaling to multiple threads, blocking threads on locks, IO, etc., kills parallelism.
+
+<p align="center">
+<a href="unsafe.md">&lt;&lt; Unsafe code</a> | <a href="README.md">^ Contents ^</a>
+</p>

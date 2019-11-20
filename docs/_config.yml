@@ -1,1 +1,4 @@
 theme: jekyll-theme-minimal
+title: PingCAP Style Guide
+description: Guide to writing idiomatic code at PingCAP and in the TiKV project.
+show_downloads: false

@@ -37,3 +37,7 @@
   It is usually better to recover than to crash the process, but TiKV can recover from crashes.
 * Make panics as easy as possible to debug.
 * Existing guidelines: [API guide](https://github.com/rust-lang-nursery/api-guidelines/blob/master/src/interoperability.md#error-types-are-meaningful-and-well-behaved-c-good-err).
+
+<p align="center">
+<a href="exprs.md">&lt;&lt; Expressions and statments</a> | <a href="unsafe.md">Unsafe code &gt;&gt;</a>
+</p>

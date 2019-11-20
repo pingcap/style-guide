@@ -76,3 +76,7 @@ mod test {
 * Self-consistency.
 * Make it easier to figure out where names come from without IDE support
 * Make it easier to see which crates and modules a module depends on.
+
+<p align="center">
+<a href="README.md#Introduction">&lt;&lt; Introduction</a> | <a href="naming.md">Naming &gt;&gt;</a>
+</p>
