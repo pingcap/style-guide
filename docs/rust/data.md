@@ -75,5 +75,5 @@ It is recommended to use the builder pattern in preference to multiple construct
 Prefer non-consuming builders (i.e., builder functions should take and return `&mut self`, not `self`).
 
 <p align="center">
-<a href="modules.md">&lt;&lt; Modules and crates</a> | <a href="traits.md">Implementing traits &gt;&gt;</a>
+<a href="modules.html">&lt;&lt; Modules and crates</a> | <a href="traits.html">Implementing traits &gt;&gt;</a>
 </p>

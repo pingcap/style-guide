@@ -122,5 +122,5 @@ It is often useful to supply a default type for associated types.
 If you add an associated type to a trait, using a default type makes the change backwards compatible.
 
 <p align="center">
-<a href="traits.md">&lt;&lt; Implementing traits</a> | <a href="macros.md">Macros &gt;&gt;</a>
+<a href="traits.html">&lt;&lt; Implementing traits</a> | <a href="macros.html">Macros &gt;&gt;</a>
 </p>

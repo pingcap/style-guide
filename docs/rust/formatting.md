@@ -78,5 +78,5 @@ mod test {
 * Make it easier to see which crates and modules a module depends on.
 
 <p align="center">
-<a href="README.md#Introduction">&lt;&lt; Introduction</a> | <a href="naming.md">Naming &gt;&gt;</a>
+<a href="README.html#Introduction">&lt;&lt; Introduction</a> | <a href="naming.html">Naming &gt;&gt;</a>
 </p>

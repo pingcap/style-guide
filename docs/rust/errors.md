@@ -39,5 +39,5 @@
 * Existing guidelines: [API guide](https://github.com/rust-lang-nursery/api-guidelines/blob/master/src/interoperability.md#error-types-are-meaningful-and-well-behaved-c-good-err).
 
 <p align="center">
-<a href="exprs.md">&lt;&lt; Expressions and statments</a> | <a href="unsafe.md">Unsafe code &gt;&gt;</a>
+<a href="exprs.html">&lt;&lt; Expressions and statments</a> | <a href="unsafe.html">Unsafe code &gt;&gt;</a>
 </p>

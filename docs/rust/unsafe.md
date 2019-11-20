@@ -92,5 +92,5 @@ Underneath `vec` is the [`raw_vec`](https://github.com/rust-lang/rust/blob/maste
 Note that the style of documentation is not quite what we use in TiKV - prefer to document invariants the module level, as well as on unsafe functions, and to document the safety invariants of every unsafe block.
 
 <p align="center">
-<a href="errors.md">&lt;&lt; Error handling</a> | <a href="performance.md">Performance &gt;&gt;</a>
+<a href="errors.html">&lt;&lt; Error handling</a> | <a href="performance.html">Performance &gt;&gt;</a>
 </p>

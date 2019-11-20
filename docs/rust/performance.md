@@ -26,5 +26,5 @@
 * Performant code requires scaling to multiple threads, blocking threads on locks, IO, etc., kills parallelism.
 
 <p align="center">
-<a href="unsafe.md">&lt;&lt; Unsafe code</a> | <a href="README.md">^ Contents ^</a>
+<a href="unsafe.html">&lt;&lt; Unsafe code</a> | <a href="README.html">^ Contents ^</a>
 </p>

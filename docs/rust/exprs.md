@@ -123,5 +123,5 @@ Use `assert` if the condition may reasonably be false due to an error or bug (ev
 If the condition might occur with no bug in code or 'impossible' error in data, then check the invariant without panicking.
 
 <p align="center">
-<a href="macros.md">&lt;&lt; Macros</a> | <a href="errors.md">Errors &gt;&gt;</a>
+<a href="macros.html">&lt;&lt; Macros</a> | <a href="errors.html">Errors &gt;&gt;</a>
 </p>

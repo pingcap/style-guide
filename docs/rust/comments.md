@@ -110,5 +110,5 @@ Prefer to write about *why* something is done, rather than *what* and *how* (whi
 - To improve the development efficiency of the whole team
 
 <p align="center">
-<a href="naming.md">&lt;&lt; Naming</a> | <a href="modules.md">Modules and crates &gt;&gt;</a>
+<a href="naming.html">&lt;&lt; Naming</a> | <a href="modules.html">Modules and crates &gt;&gt;</a>
 </p>

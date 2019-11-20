@@ -205,5 +205,5 @@ Some other considerations for dependencies:
   - Rationale: they can cause complications with complex dependency graphs, and Cargo has some bugs with default features.
 
 <p align="center">
-<a href="comments.md">&lt;&lt; Comments</a> | <a href="data.md">Data structures &gt;&gt;</a>
+<a href="comments.html">&lt;&lt; Comments</a> | <a href="data.html">Data structures &gt;&gt;</a>
 </p>

@@ -75,5 +75,5 @@ Existing guidance:
 * [RFC 430](https://github.com/rust-lang/rfcs/blob/master/text/0430-finalizing-naming-conventions.md)
 
 <p align="center">
-<a href="formatting.md">&lt;&lt; Formatting</a> | <a href="comments.md">Comments &gt;&gt;</a>
+<a href="formatting.html">&lt;&lt; Formatting</a> | <a href="comments.html">Comments &gt;&gt;</a>
 </p>

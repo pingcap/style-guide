@@ -105,5 +105,5 @@ Don't abuse these traits for custom call-like behaviour.
 * Rust prefers to avoid implicit coercion.
 
 <p align="center">
-<a href="data.md">&lt;&lt; Data types</a> | <a href="functions.md">Functions, methods, and traits &gt;&gt;</a>
+<a href="data.html">&lt;&lt; Data types</a> | <a href="functions.html">Functions, methods, and traits &gt;&gt;</a>
 </p>

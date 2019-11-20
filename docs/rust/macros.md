@@ -24,5 +24,5 @@ In such cases try to follow Rustfmt conventions as closely as possible.
 See the [Rust style guide](https://github.com/rust-lang/rfcs/tree/master/style-guide) for a specification.
 
 <p align="center">
-<a href="functions.md">&lt;&lt; Functions, methods, and traits</a> | <a href="exprs.md">Expressions and statements &gt;&gt;</a>
+<a href="functions.html">&lt;&lt; Functions, methods, and traits</a> | <a href="exprs.html">Expressions and statements &gt;&gt;</a>
 </p>
