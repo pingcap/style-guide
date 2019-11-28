@@ -122,6 +122,10 @@ Prefer `debug_assert` to `assert` if the condition should always be true.
 Use `assert` if the condition may reasonably be false due to an error or bug (even if unlikely).
 If the condition might occur with no bug in code or 'impossible' error in data, then check the invariant without panicking.
 
+Note that integer arithmetic will panic when it overflows in debug mode and will wrap in release mode.
+Only use shorthand operators when the arithmetic can *never* overflow.
+If the arithmetic may overflow, use the std functions such as `wrapping_add`, `saturating_add`, `overflowing_add`, or `checked_add`.
+
 <p align="center">
 <a href="macros.html">&lt;&lt; Macros</a> | <a href="errors.html">Errors &gt;&gt;</a>
 </p>
