@@ -25,6 +25,7 @@ E.g., `ctx` for 'context', `cf` for 'column family', or `expr` for `expression`.
 When in doubt, use the full name.
 Use acronyms where the acronym is standard, e.g., `Sql` rather than `StandardQueryLanguage`.
 Treat acronyms as words, e.g., `GrpcType` or `grpc_variable`, not `GRPCType` or `g_r_p_c_variable`/`GRPC_variable`.
+In particular, 'TiKV' should be capitalised as `Tikv`, e.g., `TikvServer`, not `TiKVServer`
 Treat contractions of multiple words as one word, e.g., `Stdin` rather than `StdIn`.
 
 Where it is clear from the wider context, if is fine to use short (even single character) names for local variables with very narrow scope.
