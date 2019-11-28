@@ -54,6 +54,7 @@
   Do not do this just for convenience.
   Facade crates are usually an anti-pattern.
   - Rationale: this worked [badly](https://aturon.github.io/tech/2018/02/06/portability-vision/) for the Rust standard library, and some other libraries.
+* In most cases, items should be publicly visible either via public modules, or by a re-export, but not both.
 
 
 ## What to import
@@ -78,7 +79,7 @@ See also [formatting/imports](formatting.md#imports).
 * Self-consistency.
 * Make it clear at the use-site where a name is defined.
 * Don't encourage boilerplate prefixes for enum variants.
-* Make names and imports easy to trace manually.
+* Make names and imports easy to trace without tooling.
 
 
 ## Crates
