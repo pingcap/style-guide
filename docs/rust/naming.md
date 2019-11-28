@@ -1,6 +1,6 @@
 # Naming
 
-Prefer meaningful names to short names.
+**Prefer meaningful names to short names.**
 
 ## Casing
 
@@ -15,13 +15,36 @@ Prefer meaningful names to short names.
 * Crate names: `kebab-case` in Cargo and `snake_case` in Rust code (but prefer single word names where possible),
 * Module names: `snake_case`.
 
-Treat acronyms as words, e.g., `GrpcType` or `grpc_variable`, not `GRPCType` or `g_r_p_c_variable`/`GRPC_variable`.
+All names should be from English.
 
 When a name is forbidden because it is a reserved word (e.g., `crate`), use raw identifiers (e.g., `r#crate`).
 
-Prefer using full words rather than abbreviations, e.g., `context` and `expansion_context` rather than `ctx` and `expn_ctx`.
-Use abbreviations where the name is taken from the wider world where an abbreviation is standard, e.g., `Sql` rather than `StandardQueryLanguage`.
-Treat abbreviations as a single word, even if it is a contraction of multiple words, e.g., `Stdin` rather than `StdIn`.
+Prefer using full words rather than abbreviations, e.g., `diagnostic` and `expansion_config` rather than `diag` and `expn_cfg`.
+It's ok to use abbreviations where they are well-known and standard outside the codebase (e.g., in the Rust or database communities).
+E.g., `ctx` for 'context', `cf` for 'column family', or `expr` for `expression`.
+When in doubt, use the full name.
+Use acronyms where the acronym is standard, e.g., `Sql` rather than `StandardQueryLanguage`.
+Treat acronyms as words, e.g., `GrpcType` or `grpc_variable`, not `GRPCType` or `g_r_p_c_variable`/`GRPC_variable`.
+Treat contractions of multiple words as one word, e.g., `Stdin` rather than `StdIn`.
+
+Where it is clear from the wider context, if is fine to use short (even single character) names for local variables with very narrow scope.
+Some examples:
+
+```rust
+// Argument to inline closure (`s`).
+vec.iter().map(|s| s.len());
+
+// Single line `match` arm (`e`).
+match ... {
+    Ok(_) => { ... }
+    Err(e) => println!("Error: {}", e),
+}
+
+// Counter in `for` loop (`i`).
+for (i, label) in labels.iter().enumerate() {
+    ...
+}
+```
 
 When interfacing with non-Rust code, prefer to use Rust conventions in the Rust code, rather than conventions from another language.
 This may mean that items in Rust and non-Rust code have different names, but the correlation should be clear.
