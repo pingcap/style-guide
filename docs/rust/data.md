@@ -50,6 +50,10 @@ Use type aliases (`type`) to provide convenience versions of common generic type
 * Avoid named fields in variants.
   - Rationale: in most cases where a struct variant is better than a tuple variant, using a named struct is even better.
 * Avoid empty variants, i.e., prefer `Foo` to `Foo()` or `Foo {}`.
+* If an enum has an intrinsic null value, prefer to have a `None` variant, rather than wrapping it with an `Option`.
+  - Similarly for `Result` and an `Err` variant.
+  - Rationale: having a `None` variant in `Foo` has a different meaning to using `Option<Foo>` (may always be null vs may sometimes be null).
+  - Using a `None` variant makes for simpler pattern matching and simpler types than using an `Option`.
 
 
 ## Tuples
