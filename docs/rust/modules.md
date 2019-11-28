@@ -8,10 +8,12 @@
 * `util` modules are often a code smell and can be split up and given better names.
 * Most modules should be declared in their own file.
   Modules consisting of only tests (`mod test { ... }`) and small modules used primarily as unsafe boundaries, may be declared inline.
-* Prefer to put all code used only for testing in a single `test` submodule with `#[cfg(test)]`, rather than putting the `cfg` on mnay items.
+* Put the most important data types and functions first.
+  This usually means putting public items before private items.
+* Prefer to put all code used only for testing in a single `test` submodule with `#[cfg(test)]`, rather than putting the `cfg` on many items.
+* Put attributes (e.g., `#[cfg(...)]`) on a module declaration (`mod foo;` or `mod foo { ... }`); do not use inner attributes (e.g., `#![cfg(...)]`).
 * Modules should always have module-level documentation.
 * Nested modules must be intuitively part of their enclosing module.
-* Put attributes (e.g., `#[cfg(...)]`) on the module declaration (`mod foo;` or `mod foo { ... }`); do not use inner attributes (e.g., `#![cfg(...)]`).
 * If crate (or less commonly, a module) has a large API, but has a relatively small subset which is commonly used, then consider adding a prelude module.
   - A prelude module should be called `prelude` should be public and at the top-level of a crate.
   - It should contain only re-exports.
@@ -28,6 +30,7 @@
 
 * Community conventions.
 * Module-level docs proved very useful in rustc.
+* Make modules quick and easy to scan.
 
 
 ## Privacy and visibility

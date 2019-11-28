@@ -109,6 +109,7 @@ Some examples of this theme:
   - Useful for having a core trait which is object-safe and a larger trait with extended behaviour.
   - An extension trait to `Foo` should be called `FooExt` if it is always valid.
   - See [RFC 445](https://github.com/rust-lang/rfcs/blob/master/text/0445-extension-trait-conventions.md) for more details.
+* Group all required methods together, then group all provided methods together.
 
 
 ## Associated types
