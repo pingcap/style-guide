@@ -6,14 +6,14 @@ The [general advice](general.md) section covers some general principles which ap
 
 At the highest level, some guidance on writing clear, high quality code is:
 
-* be consistent with surrounding code and other code in the ecosystem (in that order of priority).
+* Be consistent with surrounding code and other code in the ecosystem (in that order of priority).
 * Code is read more often than it is written; write code that is easy to read.
 * Avoid surprises for the reader, or code which is misleading in what it does.
 * Simple, straightforward code is better than complex, 'clever' code.
 
 These principles influence the writing in this guide.
 In addition, we have tried to follow existing conventions if they exist and to try to justify all guidelines.
-Some guidelines are a bit arbitrary - sometimes it is more important do something consistently than which particular thing is done.
+Some guidelines are a bit arbitrary - sometimes it is more important to do something consistently than to do a particular thing.
 
 Another reason to provide rationale for the guidelines is to help you understand the intention behind the guidelines.
 It is more important to stick to the spirit of the guide, rather than adhering to small details.

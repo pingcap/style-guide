@@ -10,12 +10,13 @@
   Modules consisting of only tests (`mod test { ... }`) and small modules used primarily as unsafe boundaries, may be declared inline.
 * Put the most important data types and functions first.
   This usually means putting public items before private items.
+  Generally structure modules "top-down", not "bottom-up".
 * Prefer to put all code used only for testing in a single `test` submodule with `#[cfg(test)]`, rather than putting the `cfg` on many items.
 * Put attributes (e.g., `#[cfg(...)]`) on a module declaration (`mod foo;` or `mod foo { ... }`); do not use inner attributes (e.g., `#![cfg(...)]`).
 * Modules should always have module-level documentation.
 * Nested modules must be intuitively part of their enclosing module.
 * If crate (or less commonly, a module) has a large API, but has a relatively small subset which is commonly used, then consider adding a prelude module.
-  - A prelude module should be called `prelude` should be public and at the top-level of a crate.
+  - A prelude module should be called `prelude`, should be public and at the top-level of a crate.
   - It should contain only re-exports.
   - A good prelude contains enough to do a library's common tasks in the common way.
   - It should not include API for customising a library for special cases.
@@ -169,7 +170,7 @@ Some other considerations for dependencies:
 ## Cargo.toml
 
 * Keep dependencies in alphabetical order.
-  - Rationale: make it easy to scan dependencies.
+  - Rationale: make it easy to scan dependencies and automate their ordering.
 * Follow this order for sections:
   - `[package]`,
   - `[lib]`s and `[[bin]]`,
@@ -199,7 +200,6 @@ Some other considerations for dependencies:
   - `readme`.
 * Crates which are not published on crates.io must also have:
   - `publish = false`.
-* Prefer to use `patch` rather than `replace`.
 * Features should never be negative (e.g., `foo` is good, `no-foo` is bad).
   - Rationale: features are combined across the dependency graph by Cargo.
 * Features should be named using kebab-case.
