@@ -87,7 +87,7 @@ See also [formatting/imports](formatting.md#imports).
 * Prefer small crates, but don't worry too hard about it.
 * Every crate should have some crate-level documentation in their top-level module and in a README.md.
 * Use a Cargo workspace where there are multiple crates in one logical project.
-* If using a workspace, either have one top-level crate, or no to-level crates and one crate with the same name as the workspace.
+* If using a workspace, either have one top-level crate, or no top-level crates and one crate with the same name as the workspace.
 * If publishing a workspace crate, minimise the number of crates in the workspace.
 * Use build scripts for tasks which are part of every build (prefer Cargo build scripts to makefiles or other scripts).
 * Use appropriate directives in build scripts (e.g., `println!("rerun-if-changed={}", some_file)`).
