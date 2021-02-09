@@ -73,7 +73,7 @@ They may also provide an inherent `iter` method for return a borrowed iterator, 
 
 Only implement operator traits where the operations are clearly and obviously those suggested by the operator.
 For example, a vector type should not implement `Mul` because both the cross product and dot product might be considered a multiply operation, but may implement `Add` since vector addition is well-known, well-defined, and unambiguous.
-If in doubt, only use implement operator types for numeric or logical types.
+If in doubt, only implement operator types for numeric or logical types.
 
 Only implement `Index` for collection types.
 Most collections should implement `Index`, `IntoIterator`, and `FromIterator`.
@@ -85,7 +85,7 @@ Most smart pointers should implement `Deref` and `Borrow`.
 `Drop` should be implemented for any types which need to tidy-up, manual destructors should never be used.
 `Drop` implementations must *never* panic.
 Be aware of implicit panics, for example due to bounds checking in indexing.
-`Drop` implementations should not fail in other way.
+`Drop` implementations should not fail in any other way.
 `Drop` implementations should not block.
 
 If a destructor might panic, fail, or block, provide a method which performs the shutdown behaviour and which returns a result (or, if necessary, panic), e.g., a `close` method.

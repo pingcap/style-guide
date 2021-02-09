@@ -5,8 +5,8 @@ The guidelines in this section should apply no matter which programming language
 * Be consistent with existing code.
 * Prioritize maintaining code over writing code.
   Code is typically modified far more times than it is initially written.
-* Prioritize refactorability of code over reuse.
-  The YAGNI principle applies here and means that you probably won't need to reuse code.
+* Prioritize refactorability of code over abstraction, generality and reuse.
+  The YAGNI principle applies here and means that you probably won't need to reuse code in the varied contexts that require elaborate abstractions.
   However, nearly all code gets changed and refactored at some point.
 * Prefer simple code over clever code.
 * Avoid (premature) optimisation until it is proved necessary.
@@ -21,7 +21,7 @@ The guidelines in this section should apply no matter which programming language
 * Use code quality tools for formatting and linting; address all compiler warnings.
 * Tests and benchmarks are code and should be written to the same high quality as other code.
   However, there are different priorities, so good code for tests may be different to good code for other source code.
-* Ensure that all code supports all platforms.
+* Ensure that all code supports all platforms supported by the product.
   Take into account things like OS-specific functionality, SIMD, inline assembly, etc.
 * Don't commit commented out code.
   It is messy and distracting, and unless well-documented, it is difficult to know why it is there.

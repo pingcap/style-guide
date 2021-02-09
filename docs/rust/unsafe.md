@@ -43,7 +43,7 @@ The following are invariants of Rust:
 
 These invariants must be maintained *all the time*, whether in safe or unsafe code (these don't have to hold in C code (or other languages) but must be re-established before returning to Rust code).
 I.e., the boundary for establishing these invariants is the FFI boundary.
-You don't need to document these invariants since they must always be maintained
+You don't need to document these invariants since they must always be maintained.
 However, it might be useful to document why they hold in specific cases or *how* they are maintained.
 
 Most uses of unsafe code also have program-specific invariants (sometimes there are no extra invariants, for example with simple FFI calls, all input and program state (assuming the Rust invariants) might be valid).

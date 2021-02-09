@@ -19,7 +19,7 @@
 
 ## Introduction
 
-You use Rustfmt at Clippy.
+You use Rustfmt and Clippy.
 You should use Rustfmt with no customisation (rustfmt.toml file).
 You should use Clippy with the same set of disabled lints as TiKV.
 The easiest way to do that with TiKV is to use `make clippy` rather than `cargo clippy`.

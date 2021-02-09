@@ -83,7 +83,7 @@ Prefer to use `if let` rather than `match` with a single arm.
 Prefer to use `match` rather than `if let ... else`.
 Rationale: use the clearest, most concise code possible.
 
-In an `if ... else` expression, but the positive condition first, e.g., `if foo { a() } else { b() }` rather than `if !foo { b() } else { a() }`.
+In an `if ... else` expression, put the positive condition first, e.g., `if foo { a() } else { b() }` rather than `if !foo { b() } else { a() }`.
 
 Prefer a guarded early return to an `if ... else` expression where one block is large and one block is small.
 E.g., prefer
