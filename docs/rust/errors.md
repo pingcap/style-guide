@@ -26,8 +26,8 @@
   - exception - when unlocking a mutex or similar operation where failure is unlikely, recovery is likely impossible, and the reason for unwrapping is well-known.
 * `unwrap` or `expect` should only be used where it is impossible to fail (e.g., after a result has already been checked with `is_ok`, although `if let` is usually a better solution here), or where it is impossible to recover from failure (e.g., mutex poisoning).
 * `unwrap` (or `expect`) can be freely used in tests.
-* If a function can panic, that should be conveyed in the name of the function - usually by including `unwrap` or `assert`.
-* If a function can panic, that behaviour shoud be described in its documentation.
+* If a function is expected to panic with non-exceptional use, that should be conveyed in the name of the function - usually by including `unwrap` or `assert`.
+* If a function can panic, that behaviour should be described in its documentation.
 * Bear in mind that indexing an array can panic.
 
 

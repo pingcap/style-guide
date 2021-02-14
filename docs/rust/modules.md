@@ -12,10 +12,10 @@
   This usually means putting public items before private items.
   Generally structure modules "top-down", not "bottom-up".
 * Prefer to put all code used only for testing in a single `test` submodule with `#[cfg(test)]`, rather than putting the `cfg` on many items.
-* Put attributes (e.g., `#[cfg(...)]`) on a module declaration (`mod foo;` or `mod foo { ... }`); do not use inner attributes (e.g., `#![cfg(...)]`).
+* Put `cfg` and `path` attributes on a module declaration (`mod foo;` or `mod foo { ... }`); for other attributes, use inner attributes in out-of-line modules and outer attributes on inline modules.
 * Modules should always have module-level documentation.
 * Nested modules must be intuitively part of their enclosing module.
-* If crate (or less commonly, a module) has a large API, but has a relatively small subset which is commonly used, then consider adding a prelude module.
+* If a crate (or less commonly, a module) has a large API, but has a relatively small subset which is commonly used, then consider adding a prelude module.
   - A prelude module should be called `prelude`, should be public and at the top-level of a crate.
   - It should contain only re-exports.
   - A good prelude contains enough to do a library's common tasks in the common way.
@@ -49,12 +49,10 @@
   Make submodules private where they are logically part of the enclosing module (i.e., the module hierarchy is an implementation detail); use re-exports (`pub use`) to expose API from the submodules.
   - This includes the case where the crate is the enclosing module.
   - Re-export from a crate where the re-exported items are logically part of the crate-level module.
+  - For modules which are only used within the crate (i.e., are not part of the API, or all modules in a bin crate), prefer not to re-export.
   - In small crates, it is often best to re-export the entire API and make all submodules private.
   - In larger crates, use public submodules in the API and only have minimal items or re-exports at the crate level (consider using a prelude module in this case).
 * Re-exporting items from dependent crates is fine if the item is logically part of the API of the re-exporting crate.
-  Do not do this just for convenience.
-  Facade crates are usually an anti-pattern.
-  - Rationale: this worked [badly](https://aturon.github.io/tech/2018/02/06/portability-vision/) for the Rust standard library, and some other libraries.
 * In most cases, items should be publicly visible either via public modules, or by a re-export, but not both.
 
 
@@ -66,11 +64,15 @@
   A common example is implementing the `std::fmt::Debug` or `Display` traits, import `std::fmt` and use `fmt::Formatter`, `fmt::Result`, etc.
 * To disambiguate names, prefer to use qualification, rather than renaming.
   E.g., use `fmt::Result` rather than `use std::fmt::Result as FmtResult`.
-* Never import enum variants, qualify use with the enum name (except for very, very common variants such as `Some` and `Err`).
-* Prefer to import a prelude module if available (using a `*` import).
+* Never import enum variants into a module, qualify use with the enum name (except for very, very common variants such as `Some` and `Err`).
+  When matching on a large enum, consider importing the enum variants into the function scope if it is not confusing.
 * Prefer to import macros rather than using `extern crate` and/or `macro_import`.
 * Prefer to import names at the module level.
   Only import names inside a function where the name is only used in that function and would cause a name clash if imported at the module level.
+* Avoid glob imports.
+  Only use a glob import when you mean "import lots of items from some module", not when you mean "I want lots of items from this module, but I don't want to write them out".
+  - It is common to import all of a prelude module using a glob import (e.g., `use futures::prelude::*'`).
+  - Exception, most `test` modules should have a `use super::*;` import.
 
 See also [formatting/imports](formatting.md#imports).
 
@@ -86,19 +88,17 @@ See also [formatting/imports](formatting.md#imports).
 ## Crates
 
 * Prefer small crates, but don't worry too hard about it.
-* Every crate should have some crate-level documentation in their top-level module and in a README.md.
+* Every crate should have some crate-level documentation in their top-level module.
+* Library crates should have some documentation in a README.md.
 * Use a Cargo workspace where there are multiple crates in one logical project.
-* If using a workspace, either have one top-level crate, or no top-level crates and one crate with the same name as the workspace.
-* If publishing a workspace crate, minimise the number of crates in the workspace.
 * Use build scripts for tasks which are part of every build (prefer Cargo build scripts to makefiles or other scripts).
 * Use appropriate directives in build scripts (e.g., `println!("rerun-if-changed={}", some_file)`).
   See the [Cargo book](https://doc.rust-lang.org/cargo/reference/build-scripts.html) for details.
 * Treat build scripts like code - follow engineering best practices and this guide.
-* One-off actions should usually be OS scripts unless they need some Cargo functionality.
 * Use [semver](https://semver.org/) versioning.
   Be aware that many minor changes can be breaking in Rust (e.g., *adding* a method to a trait).
 * Export a minimal and coherent API.
-  See the debuggability, dependability, flexibility, interoperability, and predictability in the [Rust API guidelines](https://github.com/rust-lang/api-guidelines/tree/master/src).
+  See the debuggability, dependability, flexibility, interoperability, and predictability chapters in the [Rust API guidelines](https://github.com/rust-lang/api-guidelines/tree/master/src).
 * Prefer to avoid unstable features.
   - Avoid unstable features in published crates.
   - Unstable features are ok in crates which are not published, if there is a large benefit.
@@ -107,6 +107,7 @@ See also [formatting/imports](formatting.md#imports).
     * Is the feature experimental or known to have bugs? Do not use these features.
     * If in doubt check with a Rust expert.
 * Procedural macro crates should be named 'foo-macros', where 'foo' is the main crate they support.
+  Custom derive crates should be named 'foo-derive'.
 * If any procedural macros depend on other crates, then use the following structure:
   - assuming we have crates foo and foo-macros, and a macro in foo-macros depends on a crate bar,
   - do not generate `extern crate bar;` from macros;
@@ -118,8 +119,6 @@ See also [formatting/imports](formatting.md#imports).
 ### Rationale
 
 * Small crates often improve compile times by improving parallelism.
-  However, this effect is often small and will be smaller in the future, so we shouldn't prioritise it over good design.
-* Publishing workspace crates is frustrating.
 * Follow [Rust API guidelines](https://github.com/rust-lang/api-guidelines/tree/master/src).
 
 
@@ -150,6 +149,8 @@ Some other considerations for dependencies:
     How much?
     Does it look reasonable?
     (Note that you don't need to verify every use of `unsafe`, but do try to get a general idea of the crate's quality).
+  - What feature flags does the crate offer?
+    You should usually choose the most secure and smallest set of features possible.
 * Use `cargo audit` to check for known security issues.
 * Minimise duplication due to different versions.
 * Use the most up-to-date version of a crate possible.
@@ -157,7 +158,7 @@ Some other considerations for dependencies:
 * Make dependencies optional wherever possible.
 * Path dependencies should only be used for workspace crates.
 * Prefer using published versions of dependencies rather than Git dependencies.
-* Use the simplest version possible.
+* Use the simplest version possible (i.e., use the smallest version number that you know is correct, avoid point or patch versions if possible, avoid use of semver 'operator's if possible).
 * If you must use a Git dependency, always include a `rev`.
 
 ### Rationale
@@ -207,6 +208,7 @@ Some other considerations for dependencies:
 * Prefer not to have default features.
   - Only crates which have binaries or are otherwise user-facing (i.e., not workspace crates intended to be private dependencies) should have default features.
   - Rationale: they can cause complications with complex dependency graphs, and Cargo has some bugs with default features.
+    They can cause downstream users to pull in features they don't use, increasing compile times.
 
 <p align="center">
 <a href="comments.html">&lt;&lt; Comments</a> | <a href="data.html">Data structures &gt;&gt;</a>

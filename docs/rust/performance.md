@@ -8,7 +8,7 @@
   - Use iterators.
   - Don't use `Arc` or `Mutex` for single-threaded code (use `Rc` or `RefCell` instead).
   - Avoid global, mutable state.
-  - Prefer to use `push` and `push_str` to build strings rather than the `format` macro.
+  - Prefer to use `push` and `push_str` to build strings in performance-sensitive code, rather than the `format` macro.
   - Don't worry about empty Vecs/Strings - they don't allocate and are very cheap.
   - Consider the computational complexity of algorithms, but bear in mind the expected size of input.
 * Don't hide potentially expensive code

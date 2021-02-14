@@ -22,21 +22,22 @@ Use type aliases (`type`) to provide convenience versions of common generic type
 
 * Prefer small structs.
   Build several small structs into one larger one.
-  - Rationale: more borrow checker-friendly, see also [this design pattern](https://github.com/rust-unofficial/patterns/blob/master/patterns/compose-structs.md).
+  Rationale:
+  - more borrow checker-friendly, see also [this design pattern](https://github.com/rust-unofficial/patterns/blob/master/patterns/compose-structs.md),
+  - more flexible,
+  - can lead to better design.
 * Consider carefully whether fields should be public:
   - public fields are part of a struct's API,
   - prefer to use public fields to getter and setter methods,
   - if there are object invariants that include multiple fields, then all those fields must be private,
   - changing a public field in any way is a breaking change,
   - if all fields in a struct are public, then *adding* a field is a [breaking change](https://github.com/rust-unofficial/patterns/blob/master/idioms/priv-extend.md).
-* Empty structs should usually be defined as `struct Foo;`, not `struct Foo {}` or `struct Foo();`.
+* Empty structs should be defined as `struct Foo;`, not `struct Foo {}` or `struct Foo();` (the latter two should only be used if necessary in macros).
 * If a struct is `repr(C)` then the order of the fields is significant.
-  Usually, the most efficient representation is to list the fields in descending order of size.
-  If a different ordering is required or more performant, document it.
+  The usual motivation for `repr(C)` objects is mapping them to objects in other languages.
+  If the order is not constrained, then the most efficient representation is usually to list the fields in descending order of size.
 * Restrict use of tuple structs to cases where there is only one field and it is obvious what that field is (usually because the struct is just a wrapper).
 * Use the [newtype pattern](https://github.com/rust-unofficial/patterns/blob/master/patterns/newtype.md) where structs have the same data but different behaviour.
-* Most newtypes and similar wrappers should be `repr(transparent)`.
-* It is usually enough to document the struct, rather than individual fields
   
 
 ## Enums
@@ -58,8 +59,9 @@ Use type aliases (`type`) to provide convenience versions of common generic type
 
 ## Tuples
 
-* Prefer using structs to tuples in types (e.g., of fields, return types, etc.).
-  I.e., most cases where tuples are good to use are where the type is anonymous (e.g., in closures).
+* Use a tuple to represent n logically-separate pieces of data.
+  Prefer using structs to tuples to represent a logical unit of data.
+  It can be convenient to use tuples for 'temporary' data, e.g., returning two items from a function where the tuple should be destructured immediately.
 * Only use tuples where the meaning is clearly multiple types, not as a convenience where a named type could be used.
   E.g., Use `Point { x: i32, y: i32 }` rather than `(i32, i32)`.
 * A tuple with multiple elements of the same type is very rarely a good idea.
@@ -75,8 +77,7 @@ Only use unions for FFI to mirror a C enum. In Rust code prefer an enum.
 ## Builder pattern
 
 A common way to construct concrete data with complex internals is the [builder pattern](https://doc.rust-lang.org/1.0.0/style/ownership/builders.html).
-It is recommended to use the builder pattern in preference to multiple constructor functions.
-Prefer non-consuming builders (i.e., builder functions should take and return `&mut self`, not `self`).
+It is recommended to use the builder pattern to avoid a large number of constructor functions (or complex constructor functions with many `Option`s), but avoid using them instead of one or two simple constructor functions.
 
 <p align="center">
 <a href="modules.html">&lt;&lt; Modules and crates</a> | <a href="traits.html">Implementing traits &gt;&gt;</a>

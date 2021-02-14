@@ -1,7 +1,7 @@
 # Expressions and statements
 
 Clippy has a lot of advice for writing statement-level code.
-See [their lint list](https://rust-lang.github.io/rust-clippy/master/), but bear in mind that some are lints are overly pedantic.
+See [their lint list](https://rust-lang.github.io/rust-clippy/master/), but bear in mind that some lints are overly pedantic.
 
 Don't use `println` or similar for logging/debugging (at least in committed code).
 Use a logging library.
@@ -26,10 +26,14 @@ Use a named variable instead, it is almost always clearer.
 Use `into` rather than `from` where you have the choice.
 
 Avoid using `let _ =` to address an unused result warning.
-Prefer to use `?` or `unwrap`.
+Prefer to use `?` or `expect` (or `unwrap`, if you must).
 
 Be aware that `let _foo =` and `let _ =` have different semantics; the latter does not create a scoped variable.
 This means that if the value has a destructor, it will be called immediately for the second form and at the end of the scope in the first form.
+
+Avoid using `_` as an intermediate type in macros, e.g., `&*(foo as *const _ as *const B)`.
+Using the full type is safer in the presence of change, and easier to read.
+(It is OK to use `_` as a type parameter though, e.g., using `Vec<_>` to help infer the type of a call to `collect`).
 
 Use the [`Entry` APIs](https://doc.rust-lang.org/nightly/std/collections/hash_map/enum.Entry.html).
 
@@ -41,6 +45,10 @@ Use parentheses rather than relying on operator precedence.
 Rationale: easier to read and when used regularly, avoids some hard to spot bugs.
 
 Use field initializer shorthand where possible, e.g., prefer `Foo { x, y }` to `Foo { x: x, y: y }`.
+
+Call methods with an explicit receiver where possible, e.g., prefer `x.clone()` to `Arc::Clone(x)`.
+Rationale: less clutter, more uniform, easier to read.
+(Note that in the specific case of `Arc` there was advice in the docs to use the function syntax; this is out-dated and has been removed).
 
 ## Mutability
 
@@ -69,7 +77,7 @@ Rationale: clearer intention and does not require allocation.
 Avoid using `match` where possible by using method calls.
 This is especially true for `Option` and `Result` which have a rich set of combinator methods.
 
-Avoid pattern-matching on all fields in a struct - this is a backwards compatibility hazard.
+Avoid pattern-matching on all fields in a struct - this is a backwards compatibility hazard (adding a field to the struct will mean the pattern causes an error).
 
 Prefer to list patterns explicitly rather than using a wildcard (e.g., `_`) pattern.
 Rationale: fail fast if an `enum` changes.

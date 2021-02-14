@@ -7,7 +7,7 @@
 * Do not write comments which do not add information, e.g., `Gets a Foo from self` on `get_foo`. Not everything needs a comment.
 * It can be very useful to add long comments to a module, rather than lots of short comments to each function, to give an idea of the core concepts for a module. `std` contains great examples.
 * Place single-line and block comments above the code it’s annotating.
-* Wrap long lines of comments at 80 or 100 characters.
+* Wrap long lines of comments at 100 characters.
 * Document why a function might panic in a "# Panics" doc-comment section.
 * Document any unsafe functions in a "# Safety" doc-comment section, explaining why the function is unsafe and the invariants upheld by callers.
 * Document any unsafe block with a "// Safety:" comment, justifying its correctness.
@@ -89,7 +89,7 @@ Prefer to write about *why* something is done, rather than *what* and *how* (whi
   The amount of markdown that should be used is often a matter of who the audience is and maturity of the crate.
   Well-polished and published crates tend to use more markup and more internal links than internal, unpublished crates.
 
-- Use relative URLs when appropriate for Rustdoc links.
+- Prefer to use rustdoc links rather than URLs, e.g., ``[`Foo`]`` or ``[`foo::bar::Baz`]``.
 
 
 ## Tips

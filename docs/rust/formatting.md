@@ -28,12 +28,8 @@ Rustfmt will format imports but permits several different styles.
 * Group re-exports together (`pub use ...;`).
 * Use a single nested import, rather than multiple imports, for each crate.
   - This can be achieved mechanically by using the `merge_imports` option with Rustfmt.
-* Prefer to use absolute paths to relative paths (i.e., `crate::..` rather than `super::...` or `self::...`).
+* Prefer to use absolute paths rather than relative paths (i.e., `crate::..` rather than `super::...` or `self::...`).
   Exception: when re-exporting from sub-modules, use relative paths (e.g., `pub use self::foo::bar;`).
-* Avoid glob imports.
-  Only use a glob import when you mean "import lots of items from some module", not when you mean "I want lots of items from this module, but I don't want to write them out".
-  - Exception, if a crate provides a prelude module, import it using a glob import (e.g., `use futures::prelude::*'`).
-  - Exception, every `test` module should have a `use super::*;` import.
 
 Example:
 
@@ -76,6 +72,9 @@ mod test {
 * Self-consistency.
 * Make it easier to figure out where names come from without IDE support
 * Make it easier to see which crates and modules a module depends on.
+* Make it easier to move or copy imports between modules.
+* Less duplication of paths.
+* More logical grouping of items - import structure reflects the module structure.
 
 <p align="center">
 <a href="README.html#Introduction">&lt;&lt; Introduction</a> | <a href="naming.html">Naming &gt;&gt;</a>

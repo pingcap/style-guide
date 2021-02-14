@@ -39,9 +39,12 @@ If in doubt, use the explicit type name.
 * Functions should prefer to take a borrowed reference, unless they need to take ownership of some form.
 * Functions should prefer to return an object by value, rather than using a `Box`, `Rc`, or other smart pointer.
   - Rationale: increases flexibility because the caller can decide whether to keep the object by value or pointer, without unnecessary allocation.
-* Prefer to use generics and trait bounds (or `impl Tr`) rather than concrete types.
-  However, if this flexibility is not necessary, prefer concrete types if generic types make the function overly complex.
-  - Rationale: makes functions more flexible and easier to test.
+* Consider if arguments should be generic - using generics and trait bounds rather than concrete types can make functions more flexible and testable, but can also make them more complicated and harder to read.
+  Do not use generic types unless there is a justification.
+  Avoid using generic types to make converting types more implicit.
+  E.g., `fn foo(x: impl Into<bool>)` allows `foo` to be called with either `foo(None)` or `foo(true)` which saves the caller writing `Some(true)` or `true.into()`.
+  However, the `into` is still required, it is just inside the function, and the ergonomic improvement of `true` over `Some(true)` is minimal, perhaps even negative.
+  Prefer to convert types at the place in the API where it makes logical sense, and to embrace the use of `Option` and similar types.
 * Arguments should prefer to take a custom enum which conveys meaning, rather than using a `bool` or `Option`.
   - Rationale: makes code more readable, future proof.
   - See also [the API guide](https://github.com/rust-lang/api-guidelines/blob/master/src/type-safety.md#arguments-convey-meaning-through-types-not-bool-or-option-c-custom-type).
@@ -54,15 +57,17 @@ If in doubt, use the explicit type name.
 
 ## Methods
 
-* If a function is only used by methods of a single data type, it should be a static method of that data type.
-* If a function has no clear receiver and creates a data type, it should be a static method of that data type.
-  - All constructor functions should be static methods.
 * Do not implement getters and setters unless necessary; prefer public fields.
+* If a function has no clear receiver and primarily creates a data type, it should usually be a static method of that data type.
+  I.e., All constructor functions should be static methods.
+* Private static methods should usually be free functions (modules, not types, are the primary privacy boundaries in Rust).
+* Public functions should be static methods if and only if they are logically part of the type's API, e.g., constructor functions.
+  
 
 ## Generics
 
 * Consider the trade-off between generics (or `impl Tr`) and object types (`dyn Tr`).
-  Generics are usually, but not always, better.
+  Generics are usually, but not always, better (see [this blog post](https://www.ncameron.org/blog/dyn-trait-and-impl-trait-in-rust/) for details).
 * For generics with a single, simple bound, prefer using `impl` syntax.
 * For generics with complex bounds, prefer using a `where` clause.
 * Use lifetime elision wherever possible (using 2018 rules).

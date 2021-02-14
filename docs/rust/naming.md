@@ -17,7 +17,8 @@
 
 All names should be from English.
 
-When a name is forbidden because it is a reserved word (e.g., `crate`), use raw identifiers (e.g., `r#crate`).
+When a name is forbidden because it is a reserved word (e.g., `type`, `crate`), use an abbreviation (e.g., `ty`) or an underscore suffix (e.g., `crate_`).
+Use raw identifiers (e.g., `r#type`, `r#crate`) if necessary; e.g., you are working with generated code or code which interacts with data using identifier names (e.g., JSON or protobuf libraries).
 
 Prefer using full words rather than abbreviations, e.g., `diagnostic` and `expansion_config` rather than `diag` and `expn_cfg`.
 It's ok to use abbreviations where they are well-known and standard outside the codebase (e.g., in the Rust or database communities).
@@ -57,9 +58,9 @@ Associated types should have descriptive names like any other type.
 
 ## Method names
 
-A primary (default) constructor function should be called `new`.
-If the constructor takes no arguments, prefer to implement `Default` instead.
-Secondary constructors (which customise values which take defaults in `new`) should be prefixed with `with_`, e.g., `with_capacity`.
+A primary constructor function should be called `new`.
+A `new` constructor may take values for all fields or provide some defaults.
+Secondary constructors (which usually customise more values than in `new`) should usually be prefixed with `with_`, e.g., `with_capacity`.
 
 A conversion method which preserves the original and gives a reference to a different type should be called `as_type` where `type` is the type being converted into.
 E.g., `as_str`, not `as_str_ref` or `get_str` or `str`.
@@ -85,8 +86,12 @@ When naming traits: "Prefer (transitive) verbs, nouns, and then adjectives; avoi
 E.g., `Copy`, `Send`, `Encode`.
 
 Variations of methods which have different ownership or mutability properties from the default, should use suffixes to distinguish the variations.
-E.g., `foo` for the default variation (whether that is owned or by-ref), `foo_ref` for a by-reference version, `foo_move` for a version which gives ownership, and `foo_mut` for a by-mutable-reference version.
+E.g., `foo` for the default variation (whether that is owned or by-ref), `foo_ref` for a by-reference version, and `foo_mut` for a by-mutable-reference version.
 Don't use multiple suffixes, e.g. `foo_mut_ref`.
+
+In most cases mutability does not need to be reflected in method names.
+Where it is required to disambiguate between mutable and non-mutable return types, for example, use `mut` should be a prefix, not a suffix.
+E.g., `as_mut_slice`, not `as_slice_mut`.
 
 ### Rationale
 

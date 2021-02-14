@@ -42,7 +42,7 @@ Some invariants involved multiple traits.
 For example, if an object has an `impl` for `Hash`, then if two objects are equals (via the `Eq` trait) then they must have the same hash.
 
 Many traits are markers of semantics beyond the types of their functions.
-For example, `Debug` and `Display` have the same functions but are intended for different purposes.
+For example, `Debug` and `Display` have the same functions but are intended for different purposes; never use `Debug` output (`{:?}`) in user-facing output (e.g., error messages; use in log output is ok).
 Use the appropriate trait, don't use a trait beyond its intent.
 
 Some traits are very similar, but their are recommended traits to use where possible.
@@ -82,20 +82,18 @@ Most mutable collections should implement `Extend`.
 Only implement `Deref` for smart pointer types; never for general coercion.
 Most smart pointers should implement `Deref` and `Borrow`.
 
-`Drop` should be implemented for any types which need to tidy-up, manual destructors should never be used.
+`Drop` should be implemented for any types which need to tidy-up.
 `Drop` implementations must *never* panic.
 Be aware of implicit panics, for example due to bounds checking in indexing.
 `Drop` implementations should not fail in any other way.
 `Drop` implementations should not block.
 
-If a destructor might panic, fail, or block, provide a method which performs the shutdown behaviour and which returns a result (or, if necessary, panic), e.g., a `close` method.
-The user may then call the 'shutdown' method and check for errors.
+If a destructor might panic, fail, or block, provide a method which performs the shutdown behaviour and which returns a result (or, if necessary, panics), e.g., a `close` method.
+The user may then call the shutdown method and check for errors.
 Then the destructor is guaranteed to be well-behaved.
+If the destructor is executed without the shutdown method being called, then it should always panic (so as to cause test failure).
 This should be documented.
 
-`Fn`, `FnMut`, and `FnOnce` should be implemented by function-like objects which can be called (e.g., callbacks).
-Uses of these traits should be rare, usually closures or futures are a better choice than a custom callback.
-Don't abuse these traits for custom call-like behaviour.
 
 ### Rationale
 
